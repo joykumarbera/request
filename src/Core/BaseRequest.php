@@ -21,4 +21,22 @@ class BaseRequest
     {
         $this->ch = curl_init();
     }
+    
+    /**
+     * open a curl handle
+     */
+    protected function openCurlHandle()
+    {
+        if(is_null($this->ch))
+            $this->ch = curl_init();
+    }
+
+    /**
+     * close a curl handle
+     */
+    protected function closeCurlHandle()
+    {
+        if(!is_null($this->ch))
+            \curl_close($this->ch);
+    }
 }

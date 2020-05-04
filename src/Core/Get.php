@@ -41,5 +41,6 @@ class Get extends BaseRequest implements RequestInterface
         curl_setopt($this->ch, CURLOPT_SSL_VERIFYPEER, false);
         $data = curl_exec($this->ch);
         return $data;
+        $this->closeCurlHandle();
     }
 }

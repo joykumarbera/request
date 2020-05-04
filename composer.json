@@ -2,15 +2,20 @@
     "name": "bera/request",
     "description": "a package for making http request",
     "type": "library",
+    "keywords": ["http request", "api call"],
     "license": "MIT",
     "authors": [
         {
             "name": "Joy Kumar Bera",
-            "email": "joykumarbera@gmail.com"
+            "email": "joykumarbera@gmail.com",
+            "role": "Developer"
         }
     ],
     "minimum-stability": "stable",
-    "require": {},
+    "require": {
+        "php": "^7.2",
+        "ext-curl" : "*"
+    },
     "autoload": {
         "psr-4": {
             "Bera\\Request\\" : "src"
