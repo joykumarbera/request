@@ -2,6 +2,9 @@
 
 namespace Bera\Request\Core;
 
+use Bera\Request\Exceptions\BadUrlException;
+use Bera\Request\Helper\Util;
+
 class BaseRequest 
 {
     /**
@@ -17,9 +20,10 @@ class BaseRequest
     /**
      * @var string $url
      */
-    public function __construct()
+    public function __construct($url)
     {
         $this->ch = curl_init();
+        $this->setUrl($url);
     }
     
     /**
@@ -38,5 +42,15 @@ class BaseRequest
     {
         if(!is_null($this->ch))
             \curl_close($this->ch);
+    }
+
+    /**
+     * @param string $url
+     */
+    public function setUrl($url)
+    {
+        if(Util::isValidUrl($url) === false) 
+            throw new BadUrlException($url . ' is not a valid url');
+        $this->url = $url;
     }
 }

@@ -4,32 +4,19 @@ namespace Bera\Request\Core;
 
 use Bera\Request\Core\BaseRequest;
 use Bera\Request\Interfaces\RequestInterface;
-use Bera\Request\Exceptions\BadUrlException;
-use Bera\Request\Helper\Util;
 
 class Get extends BaseRequest implements RequestInterface
 {
     /**
-     * @var string $url
+     * @param string $url
      */
     public function __construct($url)
     {
-        $this->setUrl($url);
-        parent::__construct();
+        parent::__construct($url);
     }
 
     /**
-     * @param string $url
-     */
-    public function setUrl($url)
-    {
-        if(Util::isValidUrl($url) === false) 
-            throw new BadUrlException($url . ' is not a valid url');
-        $this->url = $url;
-    }
-
-    /**
-     * grab url fire request
+     * grab url fire a get request
      * and return data
      * @return string
      */
