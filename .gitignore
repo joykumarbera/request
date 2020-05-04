@@ -1,0 +1,10 @@
+# vs code files
+.vscode
+
+# test file
+test.php
+
+# third party packages
+/vendor
+
+.phpunit.result.cache

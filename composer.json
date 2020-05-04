@@ -1,0 +1,19 @@
+{
+    "name": "bera/request",
+    "description": "a package for making http request",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Joy Kumar Bera",
+            "email": "joykumarbera@gmail.com"
+        }
+    ],
+    "minimum-stability": "stable",
+    "require": {},
+    "autoload": {
+        "psr-4": {
+            "Bera\\Request\\" : "src"
+        }
+    }
+}
