@@ -22,7 +22,7 @@ class BaseRequest
      */
     public function __construct($url)
     {
-        $this->ch = curl_init();
+        $this->openCurlHandle();
         $this->setUrl($url);
     }
     

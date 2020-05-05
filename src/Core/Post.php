@@ -4,6 +4,7 @@ namespace Bera\Request\Core;
 
 use Bera\Request\Core\BaseRequest;
 use Bera\Request\Interfaces\RequestInterface;
+use Bera\Request\Helper\Util;
 
 class Post extends BaseRequest implements RequestInterface
 {
@@ -27,6 +28,8 @@ class Post extends BaseRequest implements RequestInterface
      */
     public function attachPayLoad( $payload )
     {
+        if(!\is_array($payload))
+            throw new \Exception('payload must be an array');
         $this->payload = $payload;
     }
 
@@ -37,16 +40,19 @@ class Post extends BaseRequest implements RequestInterface
      */
     public function load()
     {
-        $data_in_json = \json_encode($this->payload);
+        $data_in_json = Util::convertArrayToJson($this->payload);
         curl_setopt($this->ch, CURLOPT_URL,$this->url);
         curl_setopt($this->ch, CURLOPT_POST, true);
         curl_setopt($this->ch, CURLOPT_POSTFIELDS,$data_in_json);
         curl_setopt($this->ch, CURLOPT_SSL_VERIFYPEER, false);
         curl_setopt($this->ch, CURLOPT_RETURNTRANSFER, true);
+
         curl_setopt($this->ch, CURLOPT_HTTPHEADER, array(                                                                          
                     'Content-Type: application/json',                                                                                
-                    'Content-Length: ' . strlen($data_in_json))                                                                       
-                ); 
+                    'Content-Length: ' . strlen($data_in_json)
+                )                                                                       
+            );
+             
         $data = curl_exec($this->ch);
         $this->closeCurlHandle();
         return $data;
