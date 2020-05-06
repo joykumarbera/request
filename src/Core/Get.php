@@ -22,12 +22,14 @@ class Get extends BaseRequest implements RequestInterface
      */
     public function load()
     {
-        curl_setopt($this->ch, CURLOPT_URL,  $this->url);
-        curl_setopt($this->ch, CURLOPT_HEADER, 0);
-        curl_setopt($this->ch, CURLOPT_RETURNTRANSFER, true);
-        curl_setopt($this->ch, CURLOPT_SSL_VERIFYPEER, false);
-        $data = curl_exec($this->ch);
-        return $data;
-        $this->closeCurlHandle();
+        $this->setCurlOptions(
+            array(
+                CURLOPT_URL => $this->url,
+                CURLOPT_HEADER => 0,
+                CURLOPT_RETURNTRANSFER => true,
+                CURLOPT_SSL_VERIFYPEER => false
+            )
+        );
+        return $this->fireRequest();
     }
 }

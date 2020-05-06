@@ -18,6 +18,27 @@ class BaseRequest
     protected $ch;
 
     /**
+     * curl option array
+     * @var array $curl_options
+     */
+    protected $curl_options = array();
+
+    /**
+     * @var $response_header
+     */
+    protected $response_header;
+
+    /**
+     * @var string $status_code
+     */
+    protected $status_code;
+
+    /**
+     * @var string $curl_error
+     */
+    protected $curl_error;
+
+    /**
      * @var string $url
      */
     public function __construct($url)
@@ -25,7 +46,25 @@ class BaseRequest
         $this->openCurlHandle();
         $this->setUrl($url);
     }
+
+    /**
+     * @param array $options
+     */
+    protected function setCurlOptions($options = [])
+    {
+        $this->curl_options = $options;
+        if(curl_setopt_array($this->ch, $this->curl_options) === false)
+            throw new \Exception('option not set properly');
+    }
     
+    /**
+     * @param string $error
+     */
+    protected function setCurlError($error)
+    {
+        $this->curl_error = $error;
+    }
+
     /**
      * open a curl handle
      */
@@ -52,5 +91,17 @@ class BaseRequest
         if(Util::isValidUrl($url) === false) 
             throw new BadUrlException($url . ' is not a valid url');
         $this->url = $url;
+    }
+
+    /**
+     * fetch a curl  reqeust
+     * @return string
+     */
+    protected function fireRequest()
+    {
+        $data = curl_exec($this->ch);
+        $this->setCurlError($this->ch);
+        $this->closeCurlHandle();
+        return $data;
     }
 }
