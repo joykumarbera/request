@@ -30,6 +30,7 @@ class Util
 
     /**
      * check if a given url is valid or not
+     * 
      * @param string $url
      * @return bool
      */

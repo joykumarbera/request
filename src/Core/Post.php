@@ -4,9 +4,10 @@ namespace Bera\Request\Core;
 
 use Bera\Request\Core\BaseRequest;
 use Bera\Request\Interfaces\RequestInterface;
+use Bera\Request\Interfaces\PostInterface;
 use Bera\Request\Helper\Util;
 
-class Post extends BaseRequest implements RequestInterface
+class Post extends BaseRequest implements RequestInterface, PostInterface
 {
     /**
      * @var array $payload
@@ -15,12 +16,10 @@ class Post extends BaseRequest implements RequestInterface
     
     /**
      * @param string $url
-     * @param array $payload
      */
-    public function __construct($url, $payload=[])
+    public function __construct($url)
     {
         parent::__construct($url);
-        $this->attachPayLoad($payload);
     }
 
     /**
@@ -34,8 +33,8 @@ class Post extends BaseRequest implements RequestInterface
     }
 
     /**
-     * grab url fire a post request
-     * and return data
+     * grab url fire a post request and return data
+     * 
      * @return string
      */
     public function load()

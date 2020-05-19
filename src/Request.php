@@ -2,8 +2,9 @@
 
 namespace Bera\Request;
 
-use Bera\Request\Interfaces\RequestInterface;
+use Bera\Request\RequestFactory;
 use Bera\Request\Helper\Util;
+
 
 class Request
 {
@@ -19,16 +20,19 @@ class Request
 
     /**
      * prepare a request for fire
-     * @param RequestInterface $req
+     * 
+     * @param string $type
+     * @param string $url
      */
-    public function __construct(RequestInterface $req)
+    public function __construct($type, $url)
     {
-        $this->req = $req;
+        $this->req = RequestFactory::create($type,$url);
         $this->data = $this->req->load();
     }
 
     /**
      * return reponse data
+     * 
      * @return string
      */
     public function respone()
@@ -38,10 +42,24 @@ class Request
 
     /**
      * return data as json format
+     * 
      * @return array
      */
     public function responeAsArray()
     {
         return Util::convertArrayFromJson($this->data);
+    }
+
+    /**
+     * @param string $name
+     * @param mixed $arg
+     * @return mixed
+     */
+    public function __call($name, $arg)
+    {
+        if(!empty($arg))
+            return $this->req->$name($arg);
+        else
+            return $this->req->$name();
     }
 }

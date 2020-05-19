@@ -16,8 +16,8 @@ class Get extends BaseRequest implements RequestInterface
     }
 
     /**
-     * grab url fire a get request
-     * and return data
+     * grab url fire a get request and return data
+     * 
      * @return string
      */
     public function load()
