@@ -5,7 +5,6 @@ namespace Bera\Request;
 use Bera\Request\RequestFactory;
 use Bera\Request\Helper\Util;
 
-
 class Request
 {
     /**
@@ -27,6 +26,13 @@ class Request
     public function __construct($type, $url)
     {
         $this->req = RequestFactory::create($type,$url);
+    }
+
+    /**
+     * load the request
+     */
+    public function load()
+    {
         $this->data = $this->req->load();
     }
 
@@ -47,7 +53,7 @@ class Request
      */
     public function responeAsArray()
     {
-        return Util::convertArrayFromJson($this->data);
+        return Util::convertJsonToArray($this->data);
     }
 
     /**

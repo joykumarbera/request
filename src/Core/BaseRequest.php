@@ -45,16 +45,31 @@ class BaseRequest
     {
         $this->openCurlHandle();
         $this->setUrl($url);
+        $this->setdefaultCurlOptions();
     }
 
     /**
      * @param array $options
      */
-    protected function setCurlOptions($options = [])
+    protected function setCurlOptions($options)
     {
-        $this->curl_options = $options;
+        if(!empty($options))
+        {
+            // $this->curl_options = array_merge($this->curl_options, $options);
+            $this->curl_options = $this->curl_options + (array) $options;
+        }
         if(curl_setopt_array($this->ch, $this->curl_options) === false)
             throw new \Exception('option not set properly');
+    }
+
+    protected function setdefaultCurlOptions()
+    {
+        $this->curl_options = array(
+            CURLOPT_URL => $this->url,
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_SSL_VERIFYPEER => false,
+            CURLOPT_SSL_VERIFYHOST => false
+        );
     }
     
     /**
@@ -90,6 +105,7 @@ class BaseRequest
     {
         if(Util::isValidUrl($url) === false) 
             throw new BadUrlException($url . ' is not a valid url');
+            
         $this->url = $url;
     }
 
@@ -99,9 +115,10 @@ class BaseRequest
      */
     protected function fireRequest()
     {
-        $data = curl_exec($this->ch);
+        $data = \curl_exec($this->ch);
         $this->setCurlError($this->ch);
         $this->closeCurlHandle();
+
         return $data;
     }
 }

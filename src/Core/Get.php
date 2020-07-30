@@ -24,12 +24,10 @@ class Get extends BaseRequest implements RequestInterface
     {
         $this->setCurlOptions(
             array(
-                CURLOPT_URL => $this->url,
                 CURLOPT_HEADER => 0,
-                CURLOPT_RETURNTRANSFER => true,
-                CURLOPT_SSL_VERIFYPEER => false
             )
         );
+        
         return $this->fireRequest();
     }
 }

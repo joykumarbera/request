@@ -28,7 +28,8 @@ class Post extends BaseRequest implements RequestInterface, PostInterface
     public function attachPayLoad( $payload )
     {
         if(!\is_array($payload))
-            throw new \Exception('payload must be an array');
+            throw new \InvalidArgumentException('payload must be an array');
+
         $this->payload = $payload;
     }
 
@@ -39,20 +40,18 @@ class Post extends BaseRequest implements RequestInterface, PostInterface
      */
     public function load()
     {
-        $data_in_json = Util::convertArrayToJson($this->payload);
+        $payload = Util::convertArrayToJson($this->payload);
         $this->setCurlOptions(
             array(
-                CURLOPT_URL => $this->url,
                 CURLOPT_POST => true,
-                CURLOPT_POSTFIELDS => $data_in_json,
-                CURLOPT_SSL_VERIFYPEER => false,
-                CURLOPT_RETURNTRANSFER => true,
+                CURLOPT_POSTFIELDS => $payload,
                 CURLOPT_HTTPHEADER => array(                                                                          
                     'Content-Type: application/json',                                                                                
-                    'Content-Length: ' . strlen($data_in_json)
+                    'Content-Length: ' . strlen($payload)
                 )  
             )
         );  
+        
         return $this->fireRequest();
     }
 }

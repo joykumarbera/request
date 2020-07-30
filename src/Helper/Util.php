@@ -10,10 +10,14 @@ class Util
      * @param string $data
      * @return array
      */
-    public static function convertArrayFromJson($data)
+    public static function convertJsonToArray($data)
     {
+        if(is_null($data))
+            throw new \Exception('data is null');
+
         if(!is_string($data)) 
             throw new NotAstringException($data . ' is not a sting');
+
         return \json_decode($data,true);
     }
 
@@ -25,6 +29,7 @@ class Util
     {
         if(!\is_array($data))
             throw new \InvalidArgumentException( $data .' is not an array');
+        
         return \json_encode($data);
     }
 
@@ -38,6 +43,7 @@ class Util
     {
         if(filter_var($url,FILTER_VALIDATE_URL) === false) 
             return false;
+        
         return true;
     }
 }
