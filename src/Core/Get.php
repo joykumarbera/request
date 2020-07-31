@@ -24,7 +24,7 @@ class Get extends BaseRequest implements RequestInterface
     {
         $this->setCurlOptions(
             array(
-                CURLOPT_HEADER => 0,
+                CURLOPT_HEADER => false,
             )
         );
         

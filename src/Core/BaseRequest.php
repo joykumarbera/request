@@ -43,8 +43,8 @@ class BaseRequest
      */
     public function __construct($url)
     {
-        $this->openCurlHandle();
         $this->setUrl($url);
+        $this->openCurlHandle();
         $this->setdefaultCurlOptions();
     }
 
@@ -55,11 +55,12 @@ class BaseRequest
     {
         if(!empty($options))
         {
-            // $this->curl_options = array_merge($this->curl_options, $options);
             $this->curl_options = $this->curl_options + (array) $options;
         }
         if(curl_setopt_array($this->ch, $this->curl_options) === false)
+        {
             throw new \Exception('option not set properly');
+        }
     }
 
     protected function setdefaultCurlOptions()
