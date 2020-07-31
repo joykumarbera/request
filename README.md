@@ -18,8 +18,8 @@ use Bera\Request\Request;
 $url = 'https://jsonplaceholder.typicode.com/posts';
 $request = new Request('GET',$url);
 $request->load();
-print_r($request->respone());
-print_r($request->responeAsArray()); // for response as an array
+print_r($request->response());
+print_r($request->responseAsArray()); // for response as an array
 ```
 
 for a post request
@@ -36,7 +36,7 @@ $payload = array(
 $request = new Request('POST',$url);
 $request->attachPayLoad($payload);
 $request->load();
-print_r($request->responeAsArray()); // for response as an array
+print_r($request->responseAsArray()); // for response as an array
 ```
 
 ## License
