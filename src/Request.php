@@ -41,7 +41,7 @@ class Request
      * 
      * @return string
      */
-    public function respone()
+    public function response()
     {
         return $this->data;
     }
@@ -51,7 +51,7 @@ class Request
      * 
      * @return array
      */
-    public function responeAsArray()
+    public function responseAsArray()
     {
         return Util::convertJsonToArray($this->data);
     }
