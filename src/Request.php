@@ -63,9 +63,6 @@ class Request
      */
     public function __call($name, $arg)
     {
-        if(!empty($arg))
-            return $this->req->$name($arg);
-        else
-            return $this->req->$name();
+        return \call_user_func_array(array($this->req,$name), $arg);
     }
 }
