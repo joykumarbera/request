@@ -77,29 +77,6 @@ class BaseRequestTest extends TestCase
         );
     }
 
-    public function testSetCurlOptions()
-    {
-        $method = $this->getObjectMethod(BaseRequest::class, 'setCurlOptions');
-        $method->invokeArgs($this->base_request,array(
-                CURLOPT_HEADER => false,
-            )
-        );
-        $base_request_curl_options = $this->getObjectProperty(
-            BaseRequest::class, 'curl_options'
-        );
-        $this->assertSame(
-            array(
-                CURLOPT_URL => $this->url,
-                CURLOPT_RETURNTRANSFER => true,
-                CURLOPT_SSL_VERIFYPEER => false,
-                CURLOPT_SSL_VERIFYHOST => false,
-                CURLOPT_HEADER => false,
-            ),
-            $base_request_curl_options->getValue($this->base_request)
-        );
-    }
-
-
     /**
      * helper method to
      * access private or procted property 
