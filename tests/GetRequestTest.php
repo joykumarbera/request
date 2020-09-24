@@ -17,20 +17,13 @@ class GetRequestTest extends TestCase
         );
     }
 
-    public function testCheckBeforeRequestDataIsNull()
-    {
-        $this->assertNull($this->request->response());
-    }
-
     public function testAfterLoadCheckIfDataIsNotNull()
     {
-        $this->request->load();
         $this->assertNotNull($this->request->response());
     }
 
     public function testResponseAsArray()
     {
-        $this->request->load();
         $this->assertIsArray($this->request->responseAsArray());
     }
 }

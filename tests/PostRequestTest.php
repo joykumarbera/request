@@ -24,21 +24,14 @@ class PostRequestTest extends TestCase
         );
         $this->request->attachPayLoad($this->payload);
     }
-
-    public function testCheckBeforeRequestDataIsNull()
-    {
-        $this->assertNull($this->request->response());
-    }
-
+    
     public function testAfterLoadCheckIfDataIsNotNull()
     {
-        $this->request->load();
         $this->assertNotNull($this->request->response());
     }
 
     public function testResponseAsArray()
     {
-        $this->request->load();
         $responseData = $this->request->responseAsArray();
         $this->assertIsArray($responseData);
         $this->assertEquals(

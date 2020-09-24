@@ -5,6 +5,11 @@ namespace Bera\Request;
 use Bera\Request\Core\Get;
 use Bera\Request\Core\Post;
 
+/**
+ * request factory class
+ * 
+ * @author Joy Kumar Bera <joykumarbera@gmail.com>
+ */
 class RequestFactory 
 {
     /**

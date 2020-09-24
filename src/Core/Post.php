@@ -23,7 +23,10 @@ class Post extends BaseRequest implements RequestInterface, PostInterface
     }
 
     /**
+     * add request payload body
+     * 
      * @param array $payload
+     * @throws InvalidArgumentException
      */
     public function attachPayLoad( $payload )
     {
@@ -34,7 +37,7 @@ class Post extends BaseRequest implements RequestInterface, PostInterface
     }
 
     /**
-     * grab url fire a post request and return data
+     * return http response data
      * 
      * @return string
      */

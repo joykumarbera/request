@@ -5,17 +5,17 @@ namespace Bera\Request;
 use Bera\Request\RequestFactory;
 use Bera\Request\Helper\Util;
 
+/**
+ * request class
+ * 
+ * @author Joy Kumar Bera <joykumarbera@gmail.com>
+ */
 class Request
 {
     /**
      * @var object $req
      */
     private $req;
-
-    /**
-     * @var string $data
-     */
-    private $data;
 
     /**
      * prepare a request for fire
@@ -29,21 +29,13 @@ class Request
     }
 
     /**
-     * load the request
-     */
-    public function load()
-    {
-        $this->data = $this->req->load();
-    }
-
-    /**
      * return reponse data
      * 
      * @return string
      */
     public function response()
     {
-        return $this->data;
+        return $this->req->load();
     }
 
     /**
@@ -53,7 +45,9 @@ class Request
      */
     public function responseAsArray()
     {
-        return Util::convertJsonToArray($this->data);
+        return Util::convertJsonToArray(
+            $this->req->load()
+        );
     }
 
     /**

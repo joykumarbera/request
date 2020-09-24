@@ -5,6 +5,11 @@ namespace Bera\Request\Core;
 use Bera\Request\Core\BaseRequest;
 use Bera\Request\Interfaces\RequestInterface;
 
+/**
+ * get request class
+ * 
+ * @author Joy Kumar Bera <joykumarbera@gmail.com>
+ */
 class Get extends BaseRequest implements RequestInterface
 {
     /**
@@ -16,7 +21,7 @@ class Get extends BaseRequest implements RequestInterface
     }
 
     /**
-     * grab url fire a get request and return data
+     * return http response data
      * 
      * @return string
      */

@@ -5,6 +5,11 @@ namespace Bera\Request\Core;
 use Bera\Request\Exceptions\BadUrlException;
 use Bera\Request\Helper\Util;
 
+/**
+ * base request class
+ * 
+ * @author Joy Kumar Bera <joykumarbera@gmail.com>
+ */
 class BaseRequest 
 {
     /**
@@ -19,6 +24,7 @@ class BaseRequest
 
     /**
      * curl option array
+     * 
      * @var array $curl_options
      */
     protected $curl_options = array();
@@ -49,6 +55,8 @@ class BaseRequest
     }
 
     /**
+     * set curl options
+     * 
      * @param array $options
      */
     protected function setCurlOptions($options)
@@ -63,6 +71,9 @@ class BaseRequest
         }
     }
 
+    /**
+     * set curl defualt options
+     */
     protected function setdefaultCurlOptions()
     {
         $this->curl_options = array(
@@ -100,7 +111,10 @@ class BaseRequest
     }
 
     /**
+     * set url
+     * 
      * @param string $url
+     * @throws BadUrlException
      */
     public function setUrl($url)
     {
@@ -112,6 +126,7 @@ class BaseRequest
 
     /**
      * fetch a curl  reqeust
+     * 
      * @return string
      */
     protected function fireRequest()
