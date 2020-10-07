@@ -27,6 +27,8 @@ class Get extends BaseRequest implements RequestInterface
      */
     public function load()
     {
+        $this->openCurlHandle();
+        $this->setdefaultCurlOptions();
         $this->setCurlOptions(
             array(
                 CURLOPT_HEADER => false,

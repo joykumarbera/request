@@ -50,8 +50,6 @@ class BaseRequest
     public function __construct($url)
     {
         $this->setUrl($url);
-        $this->openCurlHandle();
-        $this->setdefaultCurlOptions();
     }
 
     /**
@@ -72,7 +70,7 @@ class BaseRequest
     }
 
     /**
-     * set curl defualt options
+     * set defualt curl options
      */
     protected function setdefaultCurlOptions()
     {
@@ -97,8 +95,7 @@ class BaseRequest
      */
     protected function openCurlHandle()
     {
-        if(is_null($this->ch))
-            $this->ch = curl_init();
+        $this->ch = curl_init(); 
     }
 
     /**
@@ -106,8 +103,7 @@ class BaseRequest
      */
     protected function closeCurlHandle()
     {
-        if(!is_null($this->ch))
-            \curl_close($this->ch);
+        \curl_close($this->ch);
     }
 
     /**
@@ -118,8 +114,10 @@ class BaseRequest
      */
     public function setUrl($url)
     {
-        if(Util::isValidUrl($url) === false) 
+        if(Util::isValidUrl($url) === false)
+        {
             throw new BadUrlException($url . ' is not a valid url');
+        }
             
         $this->url = $url;
     }

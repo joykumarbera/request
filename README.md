@@ -14,10 +14,11 @@ for a get request
 
 ```php
 require 'vendor/autoload.php';
+
 use Bera\Request\Request;
+
 $url = 'https://jsonplaceholder.typicode.com/posts';
 $request = new Request('GET',$url);
-$request->load();
 print_r($request->response());
 print_r($request->responseAsArray()); // for response as an array
 ```
@@ -26,7 +27,9 @@ for a post request
 
 ```php
 require 'vendor/autoload.php';
+
 use Bera\Request\Request;
+
 $url = 'https://jsonplaceholder.typicode.com/posts';
 $payload = array(
     'title' => 'foo',
@@ -35,7 +38,6 @@ $payload = array(
 );
 $request = new Request('POST',$url);
 $request->attachPayLoad($payload);
-$request->load();
 print_r($request->responseAsArray()); // for response as an array
 ```
 

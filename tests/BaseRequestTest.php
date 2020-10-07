@@ -38,45 +38,7 @@ class BaseRequestTest extends TestCase
             $base_request_url->getValue($this->base_request), $this->url
         );
     }
-
-    public function testOpenCurlHandle()
-    {
-        $base_request_ch = $this->getObjectProperty(
-            BaseRequest::class, 'ch'
-        );
-
-        $this->assertIsResource($base_request_ch->getValue($this->base_request));
-    }
-
-    public function testCloseCurlHandle()
-    {
-        
-        $method = $this->getObjectMethod( BaseRequest::class, 'closeCurlHandle');
-        $method->invoke($this->base_request);
-        $base_request_ch = $this->getObjectProperty(
-            BaseRequest::class, 'ch'
-        );
-
-        $this->assertNotNull($base_request_ch->getValue($this->base_request));
-    }
-
-    public function testSetdefaultCurlOptions()
-    {
-        $base_request_curl_options = $this->getObjectProperty(
-            BaseRequest::class, 'curl_options'
-        );
-
-        $this->assertSame(
-            array(
-                CURLOPT_URL => $this->url,
-                CURLOPT_RETURNTRANSFER => true,
-                CURLOPT_SSL_VERIFYPEER => false,
-                CURLOPT_SSL_VERIFYHOST => false
-            ),
-            $base_request_curl_options->getValue($this->base_request)
-        );
-    }
-
+    
     /**
      * helper method to
      * access private or procted property 

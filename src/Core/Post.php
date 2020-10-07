@@ -43,6 +43,8 @@ class Post extends BaseRequest implements RequestInterface, PostInterface
      */
     public function load()
     {
+        $this->openCurlHandle();
+        $this->setdefaultCurlOptions();
         $payload = Util::convertArrayToJson($this->payload);
         $this->setCurlOptions(
             array(
