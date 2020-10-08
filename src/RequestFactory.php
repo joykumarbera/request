@@ -18,6 +18,7 @@ class RequestFactory
      * @param string $type
      * @param string $url
      * @return object
+     * @throws Exception
      */
     public static function create($type, $url)
     {
@@ -30,7 +31,7 @@ class RequestFactory
                 $req = new Post($url);
             break;
             default:
-                $req = new Get($url);
+                throw new \Exception('unknown request method '. $type);
             break;
         }
         return $req;

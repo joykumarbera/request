@@ -1,21 +1,19 @@
 <?php
 
 use PHPUnit\Framework\TestCase;
-use Bera\Request\Exceptions\NotAstringException;
 use Bera\Request\Helper\Util;
 
 class UtilTest extends TestCase
 {
     public function testConvertJsonToArrayWithNull()
     {
-        $this->expectException(\Exception::class);
-        $this->expectExceptionMessage('data is null');
+        $this->expectException(\InvalidArgumentException::class);
         Util::convertJsonToArray(null);
     }
 
     public function testConvertJsonToArrayWithNotString()
     {
-        $this->expectException(NotAstringException::class);
+        $this->expectException(\InvalidArgumentException::class);
         $this->expectExceptionMessage( false .' is not a sting');
         Util::convertJsonToArray(false);
     }

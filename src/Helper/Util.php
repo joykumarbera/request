@@ -2,34 +2,42 @@
 
 namespace Bera\Request\Helper;
 
-use Bera\Request\Exceptions\NotAstringException;
-
+/**
+ * Utility class
+ * 
+ * this class contains all helper functions
+ * 
+ * @author Joy Kumar Bear <joykumarbera@gmail.com>
+ */
 class Util
 {
     /**
      * @param string $data
      * @return array
+     * @throws InvalidArgumentException
      */
     public static function convertJsonToArray($data)
     {
-        if(is_null($data))
-            throw new \Exception('data is null');
-
-        if(!is_string($data)) 
-            throw new NotAstringException($data . ' is not a sting');
-
+        if(!is_string($data))
+        {
+            throw new \InvalidArgumentException($data . ' is not a sting');
+        }
+           
         return \json_decode($data,true);
     }
 
     /**
      * @param array $data
      * @return string
+     * @throws InvalidArgumentException
      */
     public static function convertArrayToJson($data)
     {
         if(!\is_array($data))
+        {
             throw new \InvalidArgumentException( $data .' is not an array');
-        
+        }
+            
         return \json_encode($data);
     }
 
